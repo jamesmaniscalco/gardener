@@ -17,8 +17,10 @@ $> flask run
 Or run it with `gunicorn`:
 
 ```
-gunicorn wsgi:app
+gunicorn -c gunicorn_config.py wsgi:app
 ```
+
+Note: to run with `gunicorn` as above you need to [follow the steps below](#environment-variables).
 
 ## Setup on the Pi:
 Start by cloning the repo remotely.
@@ -97,7 +99,7 @@ For `supervisord`, I have the following configuration in `/etc/supervisor/conf.d
 
 ```
 [program:gardener]
-command = /home/pi/code/gardener/bin/python /home/pi/code/gardener/bin/gunicorn wsgi:app
+command = /home/pi/code/gardener/bin/python /home/pi/code/gardener/bin/gunicorn -c gunicorn_config.py wsgi:app
 directory = /home/pi/code/gardener
 user = pi
 ```
@@ -115,6 +117,11 @@ $> sudo supervisorctl start gardener
 Now the server should start automatically when the Pi reboots.
 
 For the Dataplicity setup, I made an account and followed the directions there for getting started on the Raspberry Pi, then enabled the 'Wormhole' to my Pi. This exposes port 80 (where nginx is serving the gunicorn application) to the web. There is [information out there](https://www.digitalocean.com/community/tutorials/how-to-set-up-http-authentication-with-nginx-on-ubuntu-12-10) on setting up basic authentication for nginx. In the future maybe the app itself will have authentication.
+
+## Environment variables
+Copy the file `gunicorn_config_example.py` to `gunicorn_config.py` (the latter of which is not tracked by git) and update the environment variables as desired:
+
+- `FLASK_ENV`: `production` or `development`. `development` simulates sensor input.
 
 
 

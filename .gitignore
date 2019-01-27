@@ -97,6 +97,9 @@ logs/
 pyvenv.cfg
 pip-selfcheck.json
 
+# server configuration
+gunicorn_config.py
+
 # Spyder project settings
 .spyderproject
 .spyproject
