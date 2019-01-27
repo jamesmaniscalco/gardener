@@ -92,6 +92,7 @@ venv.bak/
 bin/
 include/
 lib/
+share/
 pyvenv.cfg
 pip-selfcheck.json
 
