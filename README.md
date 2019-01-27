@@ -118,10 +118,12 @@ Now the server should start automatically when the Pi reboots.
 
 For the Dataplicity setup, I made an account and followed the directions there for getting started on the Raspberry Pi, then enabled the 'Wormhole' to my Pi. This exposes port 80 (where nginx is serving the gunicorn application) to the web. There is [information out there](https://www.digitalocean.com/community/tutorials/how-to-set-up-http-authentication-with-nginx-on-ubuntu-12-10) on setting up basic authentication for nginx. In the future maybe the app itself will have authentication.
 
-## Environment variables
+## Environment variables & configuration
 Copy the file `gunicorn_config_example.py` to `gunicorn_config.py` (the latter of which is not tracked by git) and update the environment variables as desired:
 
 - `FLASK_ENV`: `production` or `development`. `development` simulates sensor input.
 
+Copy the file `instance_config_example.py` to `var/app-instance/config.py` and update the enivronment variables as desired:
 
+- `DATABASE`: the path to the sqlite3 database.
 

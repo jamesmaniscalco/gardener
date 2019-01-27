@@ -24,4 +24,10 @@ def create_app():
     # WSGI setup
     app.wsgi_app = ProxyFix(app.wsgi_app)
 
+    # database connections
+    from . import db
+    db.init_app(app)
+
     return app
+
+    
