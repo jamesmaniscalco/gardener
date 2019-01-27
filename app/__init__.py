@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask
+from werkzeug.contrib.fixers import ProxyFix
 
 
 def create_app():
@@ -19,5 +20,8 @@ def create_app():
     @app.route('/')
     def hello():
         return 'Hello, World!'
+
+    # WSGI setup
+    app.wsgi_app = ProxyFix(app.wsgi_app)
 
     return app

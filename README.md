@@ -6,12 +6,18 @@ This uses python 3.5, the default python for Raspbian (as of 2019-01-27).
 
 See `requirements.txt` for python package requirements.
 
-## Running:
+## Running locally:
 To run the app, you first need to tell Flask where to find the app. In the `gardener` directory run the following:
 
 ```
 $> export FLASK_APP=app  
 $> flask run
+```
+
+Or run it with `gunicorn`:
+
+```
+gunicorn wsgi:app
 ```
 
 ## Setup on the Pi
@@ -21,9 +27,18 @@ Start by cloning the repo remotely.
 
 Then run:
 
-```
+`
 $> git clone git@github.com:jamesmaniscalco/gardener
-```
+`
+
+`cd` into `gardener`. Create a python virtual environment:
+
+`python3 -m venv .`
+
+Install the required packages:
+
+`pip install -r requirements.txt`
+
 
 ## Access web interface remotely:
 To start with, I'm using Dataplicity to access the web interface. I want to use nginx/gunicorn. Here's what I run on the Pi to get it working.
