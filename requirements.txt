@@ -1,7 +1,17 @@
+Adafruit-Blinka==1.2.1
+adafruit-circuitpython-ads1x15==1.0.1
+adafruit-circuitpython-busdevice==2.2.8
+Adafruit-PlatformDetect==0.0.10
+Adafruit-PureIO==0.2.3
 Click==7.0
 Flask==1.0.2
 gunicorn==19.9.0
 itsdangerous==1.1.0
 Jinja2==2.10
 MarkupSafe==1.1.0
+pkg-resources==0.0.0
+rpi-ws281x==4.1.0
+RPi.GPIO==0.6.5
+spidev==3.2
+sysv-ipc==1.0.0
 Werkzeug==0.14.1
