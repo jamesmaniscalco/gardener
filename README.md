@@ -1,6 +1,8 @@
 # gardener
 Raspberry Pi / Flask automatic plant waterer.
 
+This is tuned for an ADS1115 ADC with 'Capacitive Soil Moisture Sensor v1.2'. On my Pi, I have the ADS on the 5 VDC rail and the sensor on the 3.3 VDC supply to prevent blowing out the ADC channels.
+
 ## Requirements:
 This uses python 3.5, the default python for Raspbian (as of 2019-01-27).
 
@@ -127,3 +129,15 @@ Copy the file `instance_config_example.py` to `var/app-instance/config.py` and u
 
 - `DATABASE`: the path to the sqlite3 database.
 
+## Database initialization
+Once the configuration files are in place, you can initialize the database:
+
+```
+$> flask init-db
+```
+
+Add entries for the sensors, including the ADS port number and the high and low moisture voltage limits. For example this is the entry for my first sensor:
+
+```
+$> INSERT INTO sensors (port, V_high, V_low) VALUES (0, 1.41, 2.80);
+```
