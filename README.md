@@ -3,6 +3,8 @@ Raspberry Pi / Flask automatic plant waterer.
 
 This is tuned for an ADS1115 ADC with 'Capacitive Soil Moisture Sensor v1.2'. On my Pi, I have the ADS on the 5 VDC rail and the sensor on the 3.3 VDC supply to prevent blowing out the ADC channels. The ADS1115 is on the default i2c address of 0x48 on bus 1.
 
+Plots displayed with plotly.js.
+
 ## Requirements:
 This uses python 3.5, the default python for Raspbian (as of 2019-01-27).
 
@@ -16,7 +18,9 @@ $> export FLASK_APP=app
 $> flask run
 ```
 
-Or run it with `gunicorn`:
+This will serve the site on localhost port 5000.
+
+Alternatively, run it with `gunicorn` on localhost port 8000:
 
 ```
 gunicorn -c gunicorn_config.py wsgi:app
@@ -161,5 +165,7 @@ $> sudo supervisorctl reread
 $> sudo supervisorctl update
 $> sudo supervisorctl start sensor_loop
 ```
+
+
 
 
