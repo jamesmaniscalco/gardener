@@ -166,6 +166,10 @@ $> sudo supervisorctl update
 $> sudo supervisorctl start sensor_loop
 ```
 
+If you want to stop or start the sensor readings, you can do it with supervisor:
 
-
+```
+$> sudo supervisorctl stop sensor_loop
+$> sudo supervisorctl start sensor_loop
+```
 
