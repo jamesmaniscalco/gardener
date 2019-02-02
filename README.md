@@ -1,7 +1,7 @@
 # gardener
 Raspberry Pi / Flask automatic plant waterer.
 
-This is tuned for an ADS1115 ADC with 'Capacitive Soil Moisture Sensor v1.2'. On my Pi, I have the ADS on the 5 VDC rail and the sensor on the 3.3 VDC supply to prevent blowing out the ADC channels.
+This is tuned for an ADS1115 ADC with 'Capacitive Soil Moisture Sensor v1.2'. On my Pi, I have the ADS on the 5 VDC rail and the sensor on the 3.3 VDC supply to prevent blowing out the ADC channels. The ADS1115 is on the default i2c address of 0x48 on bus 1.
 
 ## Requirements:
 This uses python 3.5, the default python for Raspbian (as of 2019-01-27).
@@ -141,3 +141,25 @@ Add entries for the sensors, including the ADS port number and the high and low 
 ```
 $> INSERT INTO sensors (port, V_high, V_low) VALUES (0, 1.41, 2.80);
 ```
+
+## Reading from sensors
+Once the sensors are inserted into the database, you will want the pi to start reading from the sensors and updating the DB. Again we will use `supervisor` to run the background program.
+
+You need a configuration file like above; mine is called `/etc/supervisor/conf.d/sensor_loop.conf`:
+
+```
+[program:sensor_loop]
+command = /home/pi/code/gardener/bin/python /home/pi/code/gardener/gpio/sensor_loop.py
+directory = /home/pi/code/gardener
+user = pi
+```
+
+Then get supervisor to recognize the program:
+
+```
+$> sudo supervisorctl reread
+$> sudo supervisorctl update
+$> sudo supervisorctl start sensor_loop
+```
+
+
