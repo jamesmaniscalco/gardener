@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div id="moistureChart" style="width:600px;height:400px;margin:0 auto;"></div>
+
+<script>
+var moistureChart = document.getElementById("moistureChart");
+var times = {{ time_data | safe }};
+var moistures = {{ moisture_data | safe }};
+var sensors = {{ sensor_names | safe }};
+var plot_data = [];
+
+for(i = 0; i < times.length; i++){
+  trace = {
+    type: "scatter",
+    mode: "lines+markers",
+    name: sensors[i],
+    x: times[i],
+    y: moistures[i]
+  };
+  plot_data.push(trace);
+}
+
+var layout = {
+  width: 600,
+  height: 400,
+  yaxis: {
+    title: "Moisture percentage",
+    range: [0,100]
+  }
+};
+
+Plotly.newPlot( moistureChart, plot_data, layout )
+
+</script>
+
+{% endblock %}
+
