@@ -28,7 +28,7 @@ def create_app():
         moisture_data = []
         sensor_names = []
         for sensor in sensors:
-            db_output = d.execute("select timestamp, voltage from readings where sensor_id={} and timestamp > datetime('now', '-5 day')".format(sensor[0])).fetchall()
+            db_output = d.execute("select datetime(timestamp, 'localtime'), voltage from readings where sensor_id={} and timestamp > datetime('now', '-5 day')".format(sensor[0])).fetchall()
             raw_data = numpy.array(db_output).transpose()
             # limit to 100 lines or fewer
             if len(raw_data[0]) > 1000:
