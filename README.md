@@ -140,10 +140,10 @@ Once the configuration files are in place, you can initialize the database:
 $> flask init-db
 ```
 
-Add entries for the sensors, including the ADS port number and the high and low moisture voltage limits. For example this is the entry for my first sensor:
+Add entries for the sensors, including the ADS port number and the high and low moisture voltage limits. Include the number of the GPIO pin that will be used for the corresponding pump. For example this is the entry for my first sensor:
 
 ```
-$> INSERT INTO sensors (port, V_high, V_low) VALUES (0, 1.41, 2.80);
+$> INSERT INTO sensors (port, V_high, V_low, pump_pin) VALUES (0, 1.41, 2.80, 16);
 ```
 
 ## Reading from sensors

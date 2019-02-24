@@ -5,7 +5,8 @@ CREATE TABLE sensors (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     port INTEGER UNIQUE NOT NULL,
     V_high REAL NOT NULL,
-    V_low REAL NOT NULL
+    V_low REAL NOT NULL,
+    pump_pin INTEGER NOT NULL
 );
 
 CREATE TABLE readings (

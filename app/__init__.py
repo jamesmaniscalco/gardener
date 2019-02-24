@@ -49,6 +49,22 @@ def create_app():
 #    from . import db
     db.init_app(app)
 
+    # make sure that the pump(s) start in 'off' mode
+    def pump_ports_off():
+      with app.app_context():
+        import board
+        import digitalio
+        from . import db
+        d = db.get_db()
+        ports = numpy.array(d.execute('SELECT pump_pin FROM sensors').fetchall()).transpose()
+        print(ports)
+        for p in ports:
+            port = digitalio.DigitalInOut(getattr(board, 'D' + '{}'.format(p[0])))
+            port.direction = digitalio.Direction.OUTPUT
+            port.value = True
+
+    pump_ports_off()
+
     return app
 
     

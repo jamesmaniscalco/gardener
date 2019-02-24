@@ -19,7 +19,6 @@ c = db.cursor()
 i2c = busio.I2C(board.SCL, board.SDA)
 ads = ADS.ADS1115(i2c)  # this may have to change later if we have multiple ADCs
 
-# sensors belong to ADCs
 class MoistureSensor:
     def __init__(self, sensor_id):
         self.sensor_id = sensor_id
