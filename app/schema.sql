@@ -9,7 +9,8 @@ CREATE TABLE sensors (
     pump_pin INTEGER NOT NULL,
     low_moisture_pct REAL NOT NULL,
     high_moisture_pct REAL NOT NULL,
-    last_watering DATETIME
+    last_watering DATETIME,
+    auto_watering_on INTEGER NOT NULL
 );
 
 CREATE TABLE readings (

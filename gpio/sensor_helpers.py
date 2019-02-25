@@ -34,6 +34,7 @@ class MoistureSensor:
         self.low_m_pct = db_row[5]
         self.high_m_pct = db_row[6]
         self.last_watering = db_row[7]
+        self.auto_watering_on = db_row[8]
         # get the port object
         port_dict = {0:ADS.P0, 1:ADS.P1, 2:ADS.P2, 3:ADS.P3}
         self.chan = AnalogIn(ads, port_dict[self.port])

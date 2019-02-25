@@ -18,6 +18,7 @@ def create_app():
     except OSError:
         pass
 
+    # routes:
     @app.route('/')
     def home():
         # get the last hour of data
