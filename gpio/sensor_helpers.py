@@ -26,9 +26,14 @@ class MoistureSensor:
         cmd = 'SELECT * FROM sensors WHERE id = {:d}'.format(sensor_id)
         c.execute(cmd)
         db_row = c.fetchone()
+        self.db_id = db_row[0]
         self.port = db_row[1]
         self.V_high = db_row[2]
         self.V_low = db_row[3]
+        self.pump_pin = db_row[4]
+        self.low_m_pct = db_row[5]
+        self.high_m_pct = db_row[6]
+        self.last_watering = db_row[7]
         # get the port object
         port_dict = {0:ADS.P0, 1:ADS.P1, 2:ADS.P2, 3:ADS.P3}
         self.chan = AnalogIn(ads, port_dict[self.port])
@@ -43,9 +48,18 @@ class MoistureSensor:
     def voltage(self):
         return self.chan.voltage
 
+    def moisture(self):
+        # moisture percentage
+        return (self.chan.voltage - self.V_low) / (self.V_high - self.V_low) * 100
+
     def write_to_db(self, voltage):
         cmd = 'INSERT INTO readings (sensor_id, voltage) VALUES ({:d}, {:f});'.format(self.sensor_id, voltage)
         #print(cmd)
+        c.execute(cmd)
+        db.commit()
+
+    def mark_watering_time(self):
+        cmd = 'UPDATE readings SET last_watering = date("now") WHERE id = {:d}'.format(self.db_id)
         c.execute(cmd)
         db.commit()
 
